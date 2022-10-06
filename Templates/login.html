@@ -7,49 +7,218 @@
     <title>CoraDoc</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"/>
-    <link rel="stylesheet" type="text/css" href="/Css/login.css">
-    
+    <link rel="stylesheet" type="text/css" href="/Css/login-register.css">
 
 </head>
+
+<header class = "container-fluid bg-light d-flex justify-content-center p-0" id="header">
+    <p>CoraDoc</p>
+
+</header>
+
 <body>
 
-    
-
-    <header class = "container-fluid bg-light d-flex justify-content-center p-2" id="header">
-        <h1>CoraDoc</h1>
-
-    </header>
-
-    <section>
-        <div class="container mt-5 pt-5">
-          <div class="row">
-            <div class="col-12 col-sm-7 col-md-6 m-auto">
-              <div class="card border-0 shadow">
-                <div class="card-body">
-                  
-                  <form action="">
-                    <input type="text" name="" id="" class="form-control my-4 py-2" placeholder="Usuario" />
-                    <input type="password" name="" id="" class="form-control my-4 py-2" placeholder="Contraseña" />
-                    <div class="text-center mt-3">
-                      <button class="btn btn-primary">iniciar Sesion</button>
-                      <button class="btn btn-primary">Registrate</button>
+    <div class="container">
+        <div class="row justify-content-center align-items-center inner-row" >
+            <div class="col-lg-5 col-md-7">
+               <div class="form-box login-form p-md-5 p-3">
+                    <div class="form-title">
+                        <h2 class="fw-bold mb-3">Iniciar Sesion</h2>
                     </div>
-                  </form>
+                    <form action="">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm" placeholder="Usuario" id="email1">
+                            <label for="floatingInput">correo</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control form-control-sm" placeholder="Contraseña" id="password1">
+                            <label for="floatingPassword">Contraseña</label>
+                        </div>
+                        <div class="mt-3">
+
+
+
+                            <button type="button" id="botonLogin" name="botonLogin" class="btn btn-primary" aria-pressed="true">Iniciar Sesion</button>
+
+                        </div>
+                    </form>
+                    <div class="mt-3">
+                        <span>¿No tienes cuenta?</span> 
+                        <a href="/Templates/register.html" class="p-0 border-0 bg-transparent primaryColor"> Registrate </a>
+                    </div>
+               </div>
+               <!--
+               <div class="form-box registration-form p-md-5 p-3">
+                <div class="form-title">
+                    <h2 class="fw-bold mb-3">Crea Tu Cuenta</h2>
                 </div>
-              </div>
+                <form action="">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control form-control-sm" placeholder="Primer Nombre" id="floatingInput">
+                        <label for="floatingInput">Primer Nombre</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control form-control-sm" placeholder="Apellido" id="floatingInput">
+                        <label for="floatingInput">Apellido</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" class="form-control form-control-sm" placeholder="Cedula Profesional" id="floatingInput">
+                        <label for="floatingInput">Cedula Profesional</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control form-control-sm" placeholder="Correo" id="correo">
+                        <label for="floatingInput">Correo</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control form-control-sm" placeholder="Contraseña" id="password">
+                        <label for="floatingPassword">Contraseña</label>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn btn-primary" id="submitData" aria-pressed="true" >Registrarse</button>
+                    </div>
+
+                </form>
+                <div class="mt-3">
+                    <span>¿Ya tienes una cuenta?</span> <button class= "p-0 border-0 bg-transparent primaryColor login-show">Iniciar Sesion</button>
+                </div>
+                -->
+                
+           </div>
             </div>
-          </div>
         </div>
-      </section>
-
-    <div class = "background-image"></div>
-    
-
-
-
-
-    
-
-    
+    </div>
 </body>
+ <!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+<script>
+
+  $(".signup-show").click(function(){
+    $(".registration-form").show();
+    $(".login-form").hide();
+  })
+
+ $(".login-show").click(function(){
+    $(".login-form").show();
+    $(".registration-form").hide();
+ }) 
+
+</script> -->
+
+
+<script type="module">
+
+    // FireBase user authentication redirect to another page
+    // https://stackoverflow.com/questions/70614945/firebase-user-authentication-redirect-to-another-page
+
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+    import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+
+    // Cambiar a firebase cuenta Ruben
+    const firebaseConfig = {
+      apiKey: "AIzaSyDeqKO79QyhLyOCTSvD1uPUp2mX5GY-dvg",
+      authDomain: "tc2007b-coradoc.firebaseapp.com",
+      databaseURL: "https://tc2007b-coradoc-default-rtdb.firebaseio.com",
+      projectId: "tc2007b-coradoc",
+      storageBucket: "tc2007b-coradoc.appspot.com",
+      messagingSenderId: "450604347298",
+      appId: "1:450604347298:web:2f23a4f576d2d5f5748cfb"
+    };
+
+
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const database = getDatabase(app);
+
+    /* submitData.addEventListener('click', (e) => { 
+
+        var email = document.getElementById('email').value
+        var password = document.getElementById('password').value
+
+        // CREAR USUARIO 
+        createUserWithEmailAndPassword(auth, email, password)
+         .then((userCredential) => {
+           
+            const user = userCredential.user;
+
+            // uid es el unique id que se genera al crear el usuario que se guarda en la base de datos
+            set(ref(database, 'users/' + user.uid), {
+                
+                email: email,
+                password: password
+            })
+                .then(() => {
+                    alert('Usuario creado!');
+                
+                })
+                .catch((error) => {
+                    alert(error);
+                    
+                });
+            
+               
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            
+            alert(errorMessage);
+        });
+
+    });
+    */
+    // INICIAR SESION
+    botonLogin.addEventListener('click', (e) => {
+
+        var email = document.getElementById('email1').value;
+        var password = document.getElementById('password1').value
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                
+                var lgDate = new Date();
+
+                update(ref(database, 'users/' + user.uid), {
+                    
+                    last_login: lgDate,
+
+                })
+                    .then(() => {
+                        alert('user logged in !');
+                    
+                    })
+                    .catch((error) => {
+                        alert(error);
+                        
+                    });
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+            });
+
+
+
+            /* signOut(auth).then(() =>{
+                }).catch((errror) => {
+
+                });
+                */ 
+    });
+
+
+</script>
 </html>
