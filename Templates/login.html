@@ -36,9 +36,7 @@
                         </div>
                         <div class="mt-3">
 
-
-
-                            <button type="button" id="botonLogin" name="botonLogin" class="btn btn-primary" aria-pressed="true">Iniciar Sesion</button>
+                            <button type="button" id="botonLogin" name="botonLogin" class="btn btn-primary" aria-pressed="true">login</button>
 
                         </div>
                     </form>
@@ -108,29 +106,22 @@
 
 
 <script type="module">
-
-    // FireBase user authentication redirect to another page
-    // https://stackoverflow.com/questions/70614945/firebase-user-authentication-redirect-to-another-page
-
-
     // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
-    import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+    import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
+    import { collection, addDoc, getFirestore, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
   
     // Your web app's Firebase configuration
-
-    // Cambiar a firebase cuenta Ruben
     const firebaseConfig = {
-      apiKey: "AIzaSyDeqKO79QyhLyOCTSvD1uPUp2mX5GY-dvg",
-      authDomain: "tc2007b-coradoc.firebaseapp.com",
-      databaseURL: "https://tc2007b-coradoc-default-rtdb.firebaseio.com",
-      projectId: "tc2007b-coradoc",
-      storageBucket: "tc2007b-coradoc.appspot.com",
-      messagingSenderId: "450604347298",
-      appId: "1:450604347298:web:2f23a4f576d2d5f5748cfb"
+        apiKey: "AIzaSyDeqKO79QyhLyOCTSvD1uPUp2mX5GY-dvg",
+        authDomain: "tc2007b-coradoc.firebaseapp.com",
+        projectId: "tc2007b-coradoc",
+        storageBucket: "tc2007b-coradoc.appspot.com",
+        messagingSenderId: "450604347298",
+        appId: "1:450604347298:web:2f23a4f576d2d5f5748cfb"
     };
 
 
@@ -139,8 +130,49 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const database = getDatabase(app);
+    const db = getFirestore(app);
 
-    /* submitData.addEventListener('click', (e) => { 
+  
+    botonLogin.addEventListener('click', (e) => {
+
+        var email = document.getElementById('email1').value;
+        var password = document.getElementById('password1').value
+        
+        
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                
+                var lgDate = new Date();
+                //alert('user logged in !');
+                location.href = "interfaz.html"
+
+
+                /* update(ref(database, 'users/' + user.uid), {
+                    
+                    last_login: lgDate,
+
+                })
+                    .then(() => {
+                        
+                    
+                    })
+                    .catch((error) => {
+                        alert(error);
+                        
+                    }); */
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                alert(errorMessage);
+            });
+
+
+    });
+      /* submitData.addEventListener('click', (e) => { 
 
         var email = document.getElementById('email').value
         var password = document.getElementById('password').value
@@ -177,47 +209,7 @@
 
     });
     */
-    // INICIAR SESION
-    botonLogin.addEventListener('click', (e) => {
-
-        var email = document.getElementById('email1').value;
-        var password = document.getElementById('password1').value
-
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                
-                var lgDate = new Date();
-
-                update(ref(database, 'users/' + user.uid), {
-                    
-                    last_login: lgDate,
-
-                })
-                    .then(() => {
-                        alert('user logged in !');
-                    
-                    })
-                    .catch((error) => {
-                        alert(error);
-                        
-                    });
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                alert(errorMessage);
-            });
-
-
-
-            /* signOut(auth).then(() =>{
-                }).catch((errror) => {
-
-                });
-                */ 
-    });
+    // iniciar sesion
 
 
 </script>

@@ -24,29 +24,32 @@
           <div class="form-title">
             <h2 class="fw-bold mb-3">Crea Tu Cuenta</h2>
           </div>
-          <form action="">
+
+
+          <form action="" id="formulario">
+
             <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-sm" placeholder="Primer Nombre" id="floatingInput">
+              <input type="text" class="form-control form-control-sm" placeholder="Primer Nombre" id="primerNombre" name="primerNombre"> 
               <label for="floatingInput">Primer Nombre</label>
             </div>
+
             <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-sm" placeholder="Apellido" id="floatingInput">
+              <input type="text" class="form-control form-control-sm" placeholder="Apellido" id="apellido" name="apellido"> 
               <label for="floatingInput">Apellido</label>
             </div>
+
             <div class="form-floating mb-3">
-              <input type="number" class="form-control form-control-sm" placeholder="Cedula Profesional" id="floatingInput">
+              <input type="number" class="form-control form-control-sm" placeholder="Cedula Profesional" id="cedulaProfesional" name="cedulaProfesional"> 
               <label for="floatingInput">Cedula Profesional</label>
             </div>
 
             <div class="form-floating mb-3">
-  
-              <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="E-mail">
+              <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="E-mail" name="email"> 
               <label for="floatingInput">Correo</label>
-
             </div>
 
             <div class="form-floating mb-3">
-              <input type="password" id="password" name="password" placeholder="password" class="form-control form-control-sm">
+              <input type="password" id="password" name="password" placeholder="password" class="form-control form-control-sm" name="password"> 
               <label for="floatingPassword">Contraseña</label>
             </div>
 
@@ -54,15 +57,19 @@
             <div class="mt-3">
 
               <!-- <button type="button" id="submitData" name="submitData" class="registerbtn">Registrate</button> -->
-              <button type="button" name="submitData" class="btn btn-primary" id="submitData" aria-pressed="true" >Registrarse</button>
+              <button type="button" name="submitData" class="btn btn-primary" id="submitData" aria-pressed="true" onclick='return enviarFormulario();'>Registrarse</button>
 
             </div>
 
           </form>
-            <div class="mt-3">
-              <span>¿Ya tienes una cuenta?</span>
-              <a href="/Templates/Login.html" class="p-0 border-0 bg-transparent primaryColor"> Iniciar Sesion </a>
-            </div>
+          <div id='error'></div>
+
+
+
+          <div class="mt-3">
+            <span>¿Ya tienes una cuenta?</span>
+            <a href="/Templates/login-register.html" class="p-0 border-0 bg-transparent primaryColor"> Iniciar Sesion </a>
+          </div>
 
 
         </div>
@@ -72,24 +79,82 @@
 
 </body>
 
+<script>
+  var nombre = document.getElementById('primerNombre');
+  var apellido = document.getElementById('apellido');
+  var cedula = document.getElementById('cedulaProfesional');
+  var email = document.getElementById('email');
+  var password = document.getElementById('password');
+  var error = document.getElementById('error');
+  error.style.color = 'red';
 
-    
+
+  function enviarFormulario(){
+    //console.log('enviando formulario');
+    var mensajesError = [];
+
+    if(nombre.value === null || nombre.value === ''){
+      mensajesError.push('Ingresa tu nombre');
+    }
+    if(apellido.value === null || apellido.value === ''){
+      mensajesError.push('Ingresa tu apellido');
+    }
+    if(cedula.value === null || cedula.value === ''){
+      mensajesError.push('Ingresa tu cedula');
+    }
+    if(email.value === null || email.value === ''){
+      mensajesError.push('Ingresa tu email');
+    }
+    if(password.value === null || password.value === ''){
+      mensajesError.push('Ingresa tu contraseña');
+    }
+    error.innerHTML = mensajesError.join(', ');
+  }
 
 
+  /* var form = document.getElementById('formulario');
+      form.addEventListener('submitData',function(evt){
+          evt.preventDefault();
+          var mensajesError = [];
 
-<script type="module">
+          if(nombre.value === null || nombre.value === ''){
+            mensajesError.push('Ingresa tu nombre');
+          }
+          if(apellido.value === null || apellido.value === ''){
+            mensajesError.push('Ingresa tu apellido');
+          }
+          if(cedula.value === null || cedula.value === ''){
+            mensajesError.push('Ingresa tu cedula');
+          }
+          if(email.value === null || email.value === ''){
+            mensajesError.push('Ingresa tu email');
+          }
+          if(password.value === null || password.value === ''){
+            mensajesError.push('Ingresa tu password');
+          }
+          error.innerHTML = mensajesError.join(', ');
+          
+      }); */ 
+
+
+</script>
+
+
+<script type="module"> 
+
+
     // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
-    import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+    import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
+    import { collection, addDoc, getFirestore, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
-    
+  
     // Your web app's Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyDeqKO79QyhLyOCTSvD1uPUp2mX5GY-dvg",
       authDomain: "tc2007b-coradoc.firebaseapp.com",
-      databaseURL: "https://tc2007b-coradoc-default-rtdb.firebaseio.com",
       projectId: "tc2007b-coradoc",
       storageBucket: "tc2007b-coradoc.appspot.com",
       messagingSenderId: "450604347298",
@@ -102,11 +167,25 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const database = getDatabase(app);
+    const db = getFirestore(app);
 
+    // const colRef = collection(db, 'doctores')
+
+    
+      
+    
     submitData.addEventListener('click', (e) => { 
+      
 
         var email = document.getElementById('email').value
+        
+        var apellido = document.getElementById('apellido').value
         var password = document.getElementById('password').value
+
+        var cedula = document.getElementById('cedulaProfesional').value
+        var nombre = document.getElementById('primerNombre').value
+      
+
 
         // CREAR USUARIO 
         createUserWithEmailAndPassword(auth, email, password)
@@ -114,21 +193,39 @@
            
             const user = userCredential.user;
 
-            // uid es el unique id que se genera al crear el usuario que se guarda en la base de datos
+            try {
+              const docRef =  addDoc(collection(db, "doctores"), {
+                apellidos: apellido,
+                cedula: cedula,
+                email: email,
+                nombre: nombre,
+               
+             
+              });
+              console.log("Document written with ID: ", docRef.id);
+              alert('Usuario creado correctamente')
+            } catch (e) {
+              console.error("Error adding document: ", e);
+            }
+            
+
+            /* uid es el unique id que se genera al crear el usuario que se guarda en la base de datos
             set(ref(database, 'users/' + user.uid), {
                 
                 email: email,
-                password: password
-            })
-                .then(() => {
-                    alert('Usuario creado!');
-                
-                })
-                .catch((error) => {
-                    alert(error);
-                    
-                });
-            
+               // apellido: apellido,
+
+            }) 
+              .then(() => {
+                  
+                  //  db.collection('doctores')
+              
+              }) 
+          .catch((error) => {
+              alert(error);
+              
+          }); */ 
+          
                
         })
         .catch((error) => {
@@ -136,6 +233,7 @@
             const errorMessage = error.message;
             
             alert(errorMessage);
+           console.error(errorMessage);
         });
 
     });
@@ -184,6 +282,6 @@
     }); 
    */
     
-
+ 
 </script>
 </html>
