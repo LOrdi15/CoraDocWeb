@@ -118,6 +118,7 @@
   botonLogout.addEventListener('click', (e) => {
     signOut(auth) 
       .then(() => {
+        alert('Se cerro sesión')
         console.log('El usuario cerro sesion')
         location.href = "login.html"
       })

@@ -36,11 +36,8 @@
               </li>
             </ul>
             
-            <a class="nav-link active" style="color:black" href="/Templates/login.html"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-              </svg>
-              </svg></a>
+             <button class="btn" type="button" id="botonLogout" name="botonLogout" aria-pressed="true"> Cerrar Sesion</button>
+
             
           </div>
         </div>
@@ -66,4 +63,46 @@
 
     
 </body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+    const firebaseConfig = {
+    apiKey: "AIzaSyDeqKO79QyhLyOCTSvD1uPUp2mX5GY-dvg",
+    authDomain: "tc2007b-coradoc.firebaseapp.com",
+    projectId: "tc2007b-coradoc",
+    storageBucket: "tc2007b-coradoc.appspot.com",
+    messagingSenderId: "450604347298",
+    appId: "1:450604347298:web:2f23a4f576d2d5f5748cfb"
+  };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  
+
+
+
+  botonLogout.addEventListener('click', (e) => {
+    signOut(auth) 
+      .then(() => {
+        alert('Se cerro sesión')
+        console.log('El usuario cerro sesion')
+        location.href = "login.html"
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+    
+  });
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // usuario logeado
+  } else {
+    // Usuario sin inicio de login
+    window.location.href = "login.html"
+  }
+  });
+
+
+
+
+</script>
 </html>
