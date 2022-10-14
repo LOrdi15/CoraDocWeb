@@ -68,7 +68,7 @@
 
           <div class="mt-3">
             <span>¿Ya tienes una cuenta?</span>
-            <a href="/Templates/login-register.html" class="p-0 border-0 bg-transparent primaryColor"> Iniciar Sesion </a>
+            <a href="/Templates/login.html" class="p-0 border-0 bg-transparent primaryColor"> Iniciar Sesion </a>
           </div>
 
 
@@ -146,7 +146,7 @@
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
-    //import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
+    import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
     import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
 
     // TODO: Add SDKs for Firebase products that you want to use
@@ -167,7 +167,7 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    //const database = getDatabase(app);
+    const database = getDatabase(app);
     const db = getFirestore(app);
 
     
@@ -194,7 +194,12 @@
         var cedula = document.getElementById('cedulaProfesional').value
         var nombre = document.getElementById('primerNombre').value
 
-        async function prueba(){
+
+        const id = doc(db,"cities", docRef.id)
+            await updateDoc(id , {
+                  id: docRef.id
+              });
+               async function prueba(){
           const docRef = await addDoc(collection(db, "cities"), {
             name: "Toaasdkyo",
             country: "Japan",
@@ -211,46 +216,55 @@
           }); 
         }
 
+
+
+
+
+
+
+
+        // CODIGO CORRECTO!
+         // CREAR USUARIO 
+        // createUserWithEmailAndPassword(auth, email, password)
+        // .then((userCredential) => {
+          
+        //   const user = userCredential.user;
+
+        //   try {
+        //     const docRef =  addDoc(collection(db, "doctores"), {
+        //       apellidos: apellido,
+        //       cedula: cedula,
+        //       email: email,
+        //       nombre: nombre,
+
+        //     });
+          
+        //     console.log("Document written with ID: ", docRef.id);
+        //     alert('Usuario creado correctamente')
+
+        //     
+            
+        //   }
+        //   catch (e) {
+        //   console.error("Error adding document: ", e);
+        //   }
+
+        // })
+        // .catch((error) => {
+        //   const errorCode = error.code;
+        //   const errorMessage = error.message;
+        
+        //   alert(errorMessage);
+        //   console.error(errorMessage);
+        // });
+
+       
+
      
       
 
       
-        // // CREAR USUARIO 
-        // createUserWithEmailAndPassword(auth, email, password)
-        //   .then((userCredential) => {
-           
-        //     const user = userCredential.user;
-
-        //     try {
-        //       const docRef =  setDoc(collection(db, "doctores"), {
-        //         apellidos: apellido,
-        //         cedula: cedula,
-        //         email: email,
-        //         nombre: nombre,
-  
-        //       });
-              
-        //       console.log("Document written with ID: ", docRef.id);
-        //       alert('Usuario creado correctamente')
-
-        //       const id = doc(db,"cities", docRef.id)
-        //       // await updateDoc(id , {
-        //       //       id: docRef.id
-        //       //   });
-              
-        //     }
-        //      catch (e) {
-        //       console.error("Error adding document: ", e);
-        //     }
-
-        //   })
-        // .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-            
-        //     alert(errorMessage);
-        //    console.error(errorMessage);
-        // });
+       
             
 
             /* uid es el unique id que se genera al crear el usuario que se guarda en la base de datos
