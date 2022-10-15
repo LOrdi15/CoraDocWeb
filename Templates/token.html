@@ -116,10 +116,9 @@
       // this value to authenticate with your backend server, if
       // you have one. Use User.getToken() instead.
       const uid = user.uid;
-      const referenciaID = doc(db,uid,"pacientes");
-        await updateDoc(referenciaID,{
-        pacientes: ["paciente1"],
-        id: arrayUnion(idPaciente)
+      const referenciaID = doc(db,"doctores",uid);
+      await updateDoc(referenciaID,{
+         pacientes: arrayUnion(idPaciente)
       })
 
     }
