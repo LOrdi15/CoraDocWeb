@@ -53,10 +53,10 @@
                     </div>
                     <form action="">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm" placeholder="Token" id="floatingInput">
+                            <input type="text" class="form-control form-control-sm" placeholder="Token" id="idToken" name="idToken">
                             <label for="floatingInput">Token</label>
                         </div>
-                            <button class="btn btn-primary">Confirmar</button>
+                            <button type="button" name="submitData" id="submitData" aria-pressed="true" class="btn btn-primary">Confirmar</button>
                         </div>
                     </form>
                </div>
@@ -66,6 +66,8 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+    import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion} from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
+
     const firebaseConfig = {
     apiKey: "AIzaSyDeqKO79QyhLyOCTSvD1uPUp2mX5GY-dvg",
     authDomain: "tc2007b-coradoc.firebaseapp.com",
@@ -76,10 +78,12 @@
   };
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
+  //const database = getDatabase(app);
+  const db = getFirestore(app);
+  const user = auth.currentUser;
   
 
-
-
+  
   botonLogout.addEventListener('click', (e) => {
     signOut(auth) 
       .then(() => {
@@ -92,9 +96,39 @@
       })
     
   });
+
+  
   onAuthStateChanged(auth, (user) => {
   if (user) {
-    // usuario logeado
+
+
+
+
+    
+    // const uid = Auth.auth().currentUser.uid 
+   
+    submitData.addEventListener('click', async (e) => {
+
+    var idPaciente = document.getElementById('idToken').value
+    if (user !== null) {
+
+      // The user's ID, unique to the Firebase project. Do NOT use
+      // this value to authenticate with your backend server, if
+      // you have one. Use User.getToken() instead.
+      const uid = user.uid;
+      const referenciaID = doc(db,uid,"pacientes");
+        await updateDoc(referenciaID,{
+        pacientes: ["paciente1"],
+        id: arrayUnion(idPaciente)
+      })
+
+    }
+
+    
+   
+
+    });
+
   } else {
     // Usuario sin inicio de login
     window.location.href = "login.html"

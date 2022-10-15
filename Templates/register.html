@@ -147,7 +147,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
     import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
-    import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
+    import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion} from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
 
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
@@ -169,11 +169,11 @@
     const auth = getAuth(app);
     const database = getDatabase(app);
     const db = getFirestore(app);
-
+   
+    
     //------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------
-    
-    
+  
   
     
     // const docRef = await addDoc(collection(db, "cities"), {
@@ -208,17 +208,89 @@
     
       
     
-    submitData.addEventListener('click', async (e) => { 
+    submitData.addEventListener("click", async (e) => { 
 
       
 
-        var email = document.getElementById('email').value
-        
-        var apellido = document.getElementById('apellido').value
-        var password = document.getElementById('password').value
+      var email = document.getElementById('email').value
+      
+      var apellido = document.getElementById('apellido').value
+      var password = document.getElementById('password').value
 
-        var cedula = document.getElementById('cedulaProfesional').value
-        var nombre = document.getElementById('primerNombre').value
+      var cedula = document.getElementById('cedulaProfesional').value
+      var nombre = document.getElementById('primerNombre').value
+
+      
+      
+    
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        
+        
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+
+      const user = auth.currentUser;
+
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        // ...
+        await setDoc(doc(db, "doctores", auth.currentUser.uid), {
+          apellidos: apellido,
+          cedula: cedula,
+          email: email,
+          nombre: nombre,
+          pacientes: []
+      
+      });
+      } else {
+        // No user is signed in.
+      }
+
+     
+      
+     
+
+
+
+
+      // await setDoc(doc(db, "doctores", auth.currentUser.uid), {
+      //   apellidos: apellido,
+      //   cedula: cedula,
+      //   email: email,
+      //   nombre: nombre,
+      //   pacientes: []
+      
+      // });
+
+      
+
+        //await setDoc(doc(db, "doctores", user.uid), data);
+
+          // const docRef =  await addDoc(collection(db, "doctores"), {
+          //   apellidos: apellido,
+          //   cedula: cedula,
+          //   email: email,
+          //   nombre: nombre,
+          //   pacientes: []
+          // });
+          
+        
+          // console.log("Document written with ID: ", docRef.id);
+
+
+          // const referencia = doc(db,"doctores", docRef.id);
+          // await updateDoc(referencia,{
+          //   id: docRef.id
+          // })
 
 
 
@@ -267,11 +339,6 @@
 //------------------------------------------------------------------------------------------
 
 
-
-
-
-      
-
         // const docRef = await addDoc(collection(db, "cities"), {
         //   name: "Tokyo",
         //   country: "Japan",
@@ -287,56 +354,8 @@
         // })
 //------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          // ...
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
-        });
-
-        const docRef =  await addDoc(collection(db, "doctores"), {
-          apellidos: apellido,
-          cedula: cedula,
-          email: email,
-          nombre: nombre,
-          pacientes: []
-        });
-        console.log("Document written with ID: ", docRef.id);
-
-
-        const referencia = doc(db,"doctores", docRef.id);
-        await updateDoc(referencia,{
-          id: docRef.id
-        })
+      
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         // CODIGO CORRECTO!
@@ -374,13 +393,7 @@
         //   console.error(errorMessage);
         // });
 
-       
-
-     
-      
-
-      
-       
+   
             
           // Real Time Data Base
             /* uid es el unique id que se genera al crear el usuario que se guarda en la base de datos
