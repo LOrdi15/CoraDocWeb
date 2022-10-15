@@ -170,6 +170,32 @@
     const database = getDatabase(app);
     const db = getFirestore(app);
 
+    //------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+    
+    
+  
+    
+    // const docRef = await addDoc(collection(db, "cities"), {
+    //   name: "Tokyo",
+    //   country: "Japan",
+    //   pacientes: ["paciente1"]
+    // });
+    // console.log("Document written with ID: ", docRef.id);
+    
+    // //
+    // const referencia = doc(db,"cities",docRef.id);
+    // await updateDoc(referencia,{
+    //   id:docRef.id,
+    //   pacientes: arrayUnion("paciente2")
+      
+    // })
+
+    
+    //------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------
+
+
     
   
    
@@ -182,7 +208,7 @@
     
       
     
-    submitData.addEventListener('click', (e) => { 
+    submitData.addEventListener('click', async (e) => { 
 
       
 
@@ -195,26 +221,116 @@
         var nombre = document.getElementById('primerNombre').value
 
 
-        const id = doc(db,"cities", docRef.id)
-            await updateDoc(id , {
-                  id: docRef.id
-              });
-               async function prueba(){
-          const docRef = await addDoc(collection(db, "cities"), {
-            name: "Toaasdkyo",
-            country: "Japan",
-            pacientes:["1"]
-
-          });
-          console.log("Document written with ID: ", docRef.id);
 
 
-          const id = doc(db,"cities", docRef.id)
-          await updateDoc(id , {
-              id: docRef.id,
-              pacientes: arrayUnion("2")
-          }); 
-        }
+// codigo funcionando 
+//------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+      
+        // createUserWithEmailAndPassword(auth, email, password)
+        //   .then((userCredential) => {
+            
+        //     const user = userCredential.user;
+
+        //     // try {
+        //     //   const docRef =  addDoc(collection(db, "doctores"), {
+        //     //     //apellidos: apellido,
+        //     //     //cedula: cedula,
+        //     //     email: email,
+        //     //     //nombre: nombre,
+
+        //     //   });
+            
+        //     //   console.log("Document written with ID: ", docRef.id);
+        //     //   alert('Usuario creado correctamente')
+
+              
+              
+        //     // }
+        //     // catch (e) {
+        //     // console.error("Error adding document: ", e);
+        //     // }
+
+        //   })
+        //   .catch((error) => {
+        //     const errorCode = error.code;
+        //     const errorMessage = error.message;
+          
+        //     alert(errorMessage);
+        //     console.error(errorMessage);
+        //   });
+
+//------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+
+//------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+
+
+
+
+
+      
+
+        // const docRef = await addDoc(collection(db, "cities"), {
+        //   name: "Tokyo",
+        //   country: "Japan",
+        //   pacientes: ["paciente1"]
+        // });
+        // console.log("Document written with ID: ", docRef.id);
+        
+        // //
+        // const referencia = doc(db,"cities",docRef.id);
+        // await updateDoc(referencia,{
+        //   id:docRef.id,
+        //   pacientes: arrayUnion("paciente2")
+        // })
+//------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
+
+        const docRef =  await addDoc(collection(db, "doctores"), {
+          apellidos: apellido,
+          cedula: cedula,
+          email: email,
+          nombre: nombre,
+          pacientes: []
+        });
+        console.log("Document written with ID: ", docRef.id);
+
+
+        const referencia = doc(db,"doctores", docRef.id);
+        await updateDoc(referencia,{
+          id: docRef.id
+        })
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -266,7 +382,7 @@
       
        
             
-
+          // Real Time Data Base
             /* uid es el unique id que se genera al crear el usuario que se guarda en la base de datos
             set(ref(database, 'users/' + user.uid), {
                 
