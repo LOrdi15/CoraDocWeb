@@ -62,7 +62,7 @@
         </div>
       </nav>
 
-
+      
 
 
       
@@ -71,9 +71,16 @@
             <div class="col-lg-8 col-md-8">
                <div class="form-box login-form p-md-5 p-3">
                     <div class="list-group">
-                 
+                      
+                      <table id="tbl_account_list" border="2" cellpadding="10" style="border-collapse:collapse;">
+                        <thead>
+                            <th>Pacientes</th>
+                            
+                        </thead>
+                
+                      </table>
 
-                        <div id="tabla"></div>
+                       
                         
                        <!-- <button type="button" name="submitData" class="btn btn-primary" id="paciente" aria-pressed="true"></button> -->
                         
@@ -96,7 +103,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
   import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
-  import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion,getDoc, query, where, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
+  import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion,getDoc, query, where, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -236,6 +243,35 @@
             // doc.data() will be undefined in this case
             console.log("No such document!");
           }
+          var info3 = docSnappp.data().uid
+          const unsub = onSnapshot(doc(db, "doctores", "G59L62Ua18g0osBzeNtTo4IdWRC2"), (doc) => {
+            
+            renderAccount(doc);
+           
+           
+
+            //console.log("Current data: ", doc.data());
+          });
+          const accountList = document.querySelector('#tbl_account_list')
+            function renderAccount(doc){
+              let tr = document.createElement('tr');
+              let td_nombre = document.createElement('td');
+
+
+              tr.setAttribute('data-id', info3);
+              td_nombre.textContent = docSnappp.data().nombre
+
+              tr.appendChild(td_nombre)
+              accountList.appendChild(tr);
+
+            }
+
+
+
+
+
+
+
         }
         // function printBtn(){
         //   for (var i = 0; i < info.length; i++){
