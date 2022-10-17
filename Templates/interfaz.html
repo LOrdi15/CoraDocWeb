@@ -78,6 +78,7 @@
                             <th>Apelidos</th>
                             <th>Num. Celular</th>
                             <th>Sexo</th>
+                            <th>Ver</th>
                             
                             
                             
@@ -211,7 +212,52 @@
 
             var item = document.getElementById("btnid"+[i]);
 
+
+
+
+
+
+            //*******************************************************************************
+            const unsub = onSnapshot(doc(db, "pacientes", "DmgcFh2jrYfZ7qN8jeXV2G7bLZG3"), (doc) => {
+            
+            renderAccount(doc);
            
+           
+
+            //console.log("Current data: ", doc.data());
+          });
+          
+          const accountList = document.querySelector('#tbl_account_list')
+            function renderAccount(doc){
+              let tr = document.createElement('tr');
+              let td_nombre = document.createElement('td');
+              let td_apellidos = document.createElement('td');
+              let td_numCelular = document.createElement('td');
+              let td_sexo = document.createElement('td');
+              let td_nacimiento = document.createElement('td');
+
+              let boton = document.createElement('td');
+ 
+              tr.setAttribute('data-id', info3);
+              td_nombre.textContent = docSnappp.data().nombre;
+              td_apellidos.textContent = docSnappp.data().apellidos
+              td_numCelular.textContent = docSnappp.data().numCelular;
+              td_sexo.textContent = docSnappp.data().sexo;
+              boton = item;
+
+              tr.appendChild(td_nombre)
+              tr.appendChild(td_apellidos)
+              tr.appendChild(td_numCelular)
+              tr.appendChild(td_sexo)
+              tr.appendChild(boton)
+              
+              
+              accountList.appendChild(tr);
+
+            }
+
+
+           //*******************************************************************************
       
             
             item.onclick=async() =>{
@@ -252,44 +298,7 @@
 
 
           var info3 = docSnappp.data().uid
-          const unsub = onSnapshot(doc(db, "pacientes", "DmgcFh2jrYfZ7qN8jeXV2G7bLZG3"), (doc) => {
-            
-            renderAccount(doc);
-           
-           
-
-            //console.log("Current data: ", doc.data());
-          });
-          
-          const accountList = document.querySelector('#tbl_account_list')
-            function renderAccount(doc){
-              let tr = document.createElement('tr');
-              let td_nombre = document.createElement('td');
-              let td_apellidos = document.createElement('td');
-              let td_numCelular = document.createElement('td');
-             
-              let td_sexo = document.createElement('td');
-              let td_nacimiento = document.createElement('td');
-              
-
-
-              tr.setAttribute('data-id', info3);
-              td_nombre.textContent = docSnappp.data().nombre;
-              td_apellidos.textContent = docSnappp.data().apellidos
-              td_numCelular.textContent = docSnappp.data().numCelular;
-              td_sexo.textContent = docSnappp.data().sexo;
-              
-             
-
-              tr.appendChild(td_nombre)
-              tr.appendChild(td_apellidos)
-              tr.appendChild(td_numCelular)
-              tr.appendChild(td_sexo)
-              
-              
-              accountList.appendChild(tr);
-
-            }
+         
 
 
 
