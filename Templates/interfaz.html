@@ -75,7 +75,7 @@
 
                         <div id="tabla"></div>
                         
-                        <button type="button" name="submitData" class="btn btn-primary" id="paciente" aria-pressed="true"></button>
+                       <!-- <button type="button" name="submitData" class="btn btn-primary" id="paciente" aria-pressed="true"></button> -->
                         
                         
                        
@@ -96,7 +96,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
   import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
-  import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion,getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
+  import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion,getDoc, query, where, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -157,42 +157,107 @@
         var info = docSnap.data().pacientes
         var pacientes = [info]
         
+
+       
+     
+        
         //Creacion html
-        var row ="";
-        for (var i = 0; i < info.length; i++){
-          var row = row + info[i] + "<br>";
+       
+        // for (var i = 0; i < inf; i++){
+        //   var row = "<h2>" + inf + "<h2>";
           
-          document.getElementById("paciente").innerHTML = row
-        }
+        //   document.getElementById("tabla").innerHTML = row
+        // }
       
 
         
-        //---------------------------------------------------------------
-        
-        function printBtn(){
-          for (var i = 0; i < info.length; i++){
+       
+        //--------------------
+        for (var i = 0; i < info.length; i++){
+          const docRefff = doc(db, "pacientes", info[i]);
+          const docSnappp = await getDoc(docRefff);
+          
+
+          if (docSnappp.exists()) {
+            
+            function printBtn(){
+              
+              
             var btn = document.createElement("button");
-            var t = document.createTextNode(info[i]);
+              
+            btn.setAttribute("class","btn");
+            //btn.setAttribute("id","btnid"+i);
+            btn.id = "btnid" + i;
+            
+
+            
+            
+
+            var t = document.createTextNode(docSnappp.data([i]).nombre);
             btn.appendChild(t);
             document.body.appendChild(btn);
+
+            var item = document.getElementById("btnid"+[i]);
+
+           
+      
+            
+            item.onclick=async() =>{
+              var infoo = docSnappp.data()
+              console.log(infoo)
+
+              var info3 = docSnappp.data().uid
+
+              
+              const q = query(collection(db, "registros"), where("idPaciente", "==", info3), limit(3));
+              const querySnapshot = await getDocs(q);
+              querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+              })
+
+             
+
+            }
+
+              
+              
+              
+            }
+            window.onload = printBtn();
+
+           
+            
+
+
+            console.log("Nombre paciente del arreglo:", docSnappp.data().nombre);
+            
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
           }
         }
-        window.onload = printBtn();
-       
-
-
+        // function printBtn(){
+        //   for (var i = 0; i < info.length; i++){
+        //     var btn = document.createElement("button");
+        //     var t = document.createTextNode(info[i].nombre);
+        //     btn.appendChild(t);
+        //     document.body.appendChild(btn);
+        //   }
+        // }
+        // window.onload = printBtn();
 
 
 
         // paciente  
 
 
-        var string = parseInt(info)
-        const docReff = doc(db, "pacientes", "DmgcFh2jrYfZ7qN8jeXV2G7bLZG3");
+        
+        const docReff = doc(db, "pacientes", "pYCxAJh9nGbHljuiouWiRJ7bDKk2");
         const docSnapp = await getDoc(docReff);
 
-        if (docSnap.exists()) {
-          console.log("Info paciente especificando ID manualmente", docSnapp.data().nombre);
+        if (docSnapp.exists()) {
+          console.log("Info paciente especificando ID manualmente", docSnapp.data());
         } else {
           // doc.data() will be undefined in this case
           console.log("No such document!");
@@ -200,6 +265,7 @@
         //console.log("Nombre paciente:",docSnapp.data().nombre);
         // 
         // 
+        
         
 
 
