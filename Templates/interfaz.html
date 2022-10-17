@@ -74,7 +74,12 @@
                       
                       <table id="tbl_account_list" border="2" cellpadding="10" style="border-collapse:collapse;">
                         <thead>
-                            <th>Pacientes</th>
+                            <th>Nombre</th>
+                            <th>Apelidos</th>
+                            <th>Num. Celular</th>
+                            <th>Sexo</th>
+                            
+                            
                             
                         </thead>
                 
@@ -211,7 +216,7 @@
             
             item.onclick=async() =>{
               var infoo = docSnappp.data()
-              console.log(infoo)
+              console.log("Informacion paciente", infoo)
 
               var info3 = docSnappp.data().uid
 
@@ -243,8 +248,11 @@
             // doc.data() will be undefined in this case
             console.log("No such document!");
           }
+
+
+
           var info3 = docSnappp.data().uid
-          const unsub = onSnapshot(doc(db, "doctores", "G59L62Ua18g0osBzeNtTo4IdWRC2"), (doc) => {
+          const unsub = onSnapshot(doc(db, "pacientes", "DmgcFh2jrYfZ7qN8jeXV2G7bLZG3"), (doc) => {
             
             renderAccount(doc);
            
@@ -252,16 +260,33 @@
 
             //console.log("Current data: ", doc.data());
           });
+          
           const accountList = document.querySelector('#tbl_account_list')
             function renderAccount(doc){
               let tr = document.createElement('tr');
               let td_nombre = document.createElement('td');
+              let td_apellidos = document.createElement('td');
+              let td_numCelular = document.createElement('td');
+             
+              let td_sexo = document.createElement('td');
+              let td_nacimiento = document.createElement('td');
+              
 
 
               tr.setAttribute('data-id', info3);
-              td_nombre.textContent = docSnappp.data().nombre
+              td_nombre.textContent = docSnappp.data().nombre;
+              td_apellidos.textContent = docSnappp.data().apellidos
+              td_numCelular.textContent = docSnappp.data().numCelular;
+              td_sexo.textContent = docSnappp.data().sexo;
+              
+             
 
               tr.appendChild(td_nombre)
+              tr.appendChild(td_apellidos)
+              tr.appendChild(td_numCelular)
+              tr.appendChild(td_sexo)
+              
+              
               accountList.appendChild(tr);
 
             }
