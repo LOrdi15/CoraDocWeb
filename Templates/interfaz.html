@@ -71,11 +71,15 @@
             <div class="col-lg-8 col-md-8">
                <div class="form-box login-form p-md-5 p-3">
                     <div class="list-group">
-                      
-                        <a href="/Templates/pacientes.html" class="list-group-item list-group-item-action">Nombre de Paciente</a>
-                        <a href="/Templates/pacientes.html" class="list-group-item list-group-item-action">Nombre de Paciente</a>
-                        <a href="/Templates/pacientes.html" class="list-group-item list-group-item-action">Nombre de Paciente</a>
-                        <a href="/Templates/pacientes.html" class="list-group-item list-group-item-action">Nombre de Paciente</a>
+                 
+
+                        <div id="tabla"></div>
+                        
+                        <button type="button" name="submitData" class="btn btn-primary" id="paciente" aria-pressed="true"></button>
+                        
+                        
+                       
+
                         
                     </div>
                 </div>
@@ -90,10 +94,10 @@
 <script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+  import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged  } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
   import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
-  import { collection, addDoc, getFirestore, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
-  // TODO: Add SDKs for Firebase products that you want to use
+  import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion,getDoc, query, where } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
+// TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
   // Your web app's Firebase configuration
@@ -113,6 +117,7 @@
   const auth = getAuth(app);
   const database = getDatabase(app);
   const db = getFirestore(app);
+  const user = auth.currentUser;
 
 
   botonLogout.addEventListener('click', (e) => {
@@ -127,14 +132,111 @@
       })
     
   });
-  onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // usuario logeado
-  } else {
-    // User is signed out
-    window.location.href = "login.html"
-  }
+  
+
+
+  onAuthStateChanged(auth,async (user) => {
+
+    if (user !==null) {
+      const uid = user.uid
+      const docRef = doc(db, "doctores", uid);
+      const docSnap = await getDoc(docRef);
+
+
+      // const docReff = doc(db, "pacientes", "DmgcFh2jrYfZ7qN8jeXV2G7bLZG3");
+      // const docSnapp = await getDoc(docReff);
+
+    
+      
+      
+      
+      if (docSnap.exists() ) {
+        
+        // Traer base de datos doctor
+        console.log("ID pacientes",docSnap.data().pacientes);
+        var info = docSnap.data().pacientes
+        var pacientes = [info]
+        
+        //Creacion html
+        var row ="";
+        for (var i = 0; i < info.length; i++){
+          var row = row + info[i] + "<br>";
+          
+          document.getElementById("paciente").innerHTML = row
+        }
+      
+
+        
+        //---------------------------------------------------------------
+        
+        function printBtn(){
+          for (var i = 0; i < info.length; i++){
+            var btn = document.createElement("button");
+            var t = document.createTextNode(info[i]);
+            btn.appendChild(t);
+            document.body.appendChild(btn);
+          }
+        }
+        window.onload = printBtn();
+       
+
+
+
+
+
+        // paciente  
+
+
+        var string = parseInt(info)
+        const docReff = doc(db, "pacientes", "DmgcFh2jrYfZ7qN8jeXV2G7bLZG3");
+        const docSnapp = await getDoc(docReff);
+
+        if (docSnap.exists()) {
+          console.log("Info paciente especificando ID manualmente", docSnapp.data().nombre);
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+        }
+        //console.log("Nombre paciente:",docSnapp.data().nombre);
+        // 
+        // 
+        
+
+
+
+        
+        
+
+
+       
+      
+
+
+       
+
+        
+        
+        
+       
+
+      } else {
+
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+        
+      }
+
+      
+
+
+
+
+      } else {
+        // User is signed out
+        window.location.href = "login.html"
+      }
   });
+ 
 
   /* firebase.auth().onAuthStateChanged(function(user){
       if(user){
