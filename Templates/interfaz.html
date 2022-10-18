@@ -78,7 +78,23 @@
                             <th>Apelidos</th>
                             <th>Num. Celular</th>
                             <th>Sexo</th>
-                            <th>Ver</th>
+                            <th>Ver Paciente</th>
+                            
+                            
+                            
+                        </thead>
+                
+                      </table>
+                      <br>
+                      <table id="tabla_registros" border="2" cellpadding="10" style="border-collapse:collapse;">
+                        <thead>
+                            <th>Nombre</th>
+                            <th>Cantidad de Tomas</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Promedio Diastolica</th>
+                            <th>Promedio Pulso</th>
+                            <th>Promedio Sistolica</th>
                             
                             
                             
@@ -192,7 +208,7 @@
           
 
           if (docSnappp.exists()) {
-            
+            var idPaciente = docSnappp.data().uid
             function printBtn(){
               
               
@@ -218,14 +234,21 @@
 
 
             //*******************************************************************************
-            const unsub = onSnapshot(doc(db, "pacientes", "DmgcFh2jrYfZ7qN8jeXV2G7bLZG3"), (doc) => {
             
-            renderAccount(doc);
+
+
+            const unsub = onSnapshot(doc(db, "pacientes", idPaciente), (doc) => {
+            
+              renderAccount(doc);
            
            
 
-            //console.log("Current data: ", doc.data());
-          });
+              //console.log("Current data: ", doc.data());
+            });
+            
+
+
+            
           
           const accountList = document.querySelector('#tbl_account_list')
             function renderAccount(doc){
@@ -238,7 +261,7 @@
 
               let boton = document.createElement('td');
  
-              tr.setAttribute('data-id', info3);
+              //tr.setAttribute('data-id', idPaciente);
               td_nombre.textContent = docSnappp.data().nombre;
               td_apellidos.textContent = docSnappp.data().apellidos
               td_numCelular.textContent = docSnappp.data().numCelular;
@@ -261,20 +284,97 @@
       
             
             item.onclick=async() =>{
-              var infoo = docSnappp.data()
-              console.log("Informacion paciente", infoo)
 
-              var info3 = docSnappp.data().uid
 
               
-              const q = query(collection(db, "registros"), where("idPaciente", "==", info3), limit(3));
+              var datosPaciente = docSnappp.data()
+              //console.log("Informacion paciente", datosPaciente)
+
+              
+
+              
+              const q = query(collection(db, "registros"), where("idPaciente", "==", idPaciente), limit(3));
               const querySnapshot = await getDocs(q);
-              querySnapshot.forEach((doc) => {
+              //var idRegistro = querySnapshot.data().idRegistro;
+              
+              querySnapshot.forEach(async(doc) => {
+                var idRegistro = doc.data().idRegistro;
+                
+                
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
+                console.log(doc.id, " SIIIIIIII ", idRegistro);
+                
+          
+
+                //console.log("Current data: ", doc.data());
+                const accountList1 = document.querySelector('#tabla_registros')
+                function renderAccount1(doc){
+                  let td_nombre = document.createElement('td');
+                  let tr1 = document.createElement('tr');
+                  let cantidadTomas = document.createElement('td');
+                  let fecha = document.createElement('td');
+                  let hora = document.createElement('td');
+                  let Diastolica = document.createElement('td');
+                  let pulso = document.createElement('td');
+                  let sistolica = document.createElement('td');
+
+                  
+    
+                  //tr.setAttribute('data-id', idPaciente);
+
+                  cantidadTomas.textContent = doc.data().cantidadTomas;
+                  fecha.textContent = doc.data().fecha
+                  hora.textContent = doc.data().hora;
+                  Diastolica.textContent = doc.data().promDiastolica;
+                  pulso.textContent = doc.data().promPulso;
+                  sistolica.textContent = doc.data().promSistolica;
+                  td_nombre.textContent = docSnappp.data().nombre;
+                  
+                  tr1.appendChild(td_nombre)
+                  tr1.appendChild(cantidadTomas)
+                  tr1.appendChild(fecha)
+                  tr1.appendChild(hora)
+                  tr1.appendChild(Diastolica)
+                  tr1.appendChild(pulso)
+                  tr1.appendChild(sistolica)
+                  
+                  
+                  accountList1.appendChild(tr1);
+
+             }
+
+             renderAccount1(doc);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
+
               })
 
-             
+     
+              
+            
 
             }
 
@@ -297,7 +397,7 @@
 
 
 
-          var info3 = docSnappp.data().uid
+          var idPaciente = docSnappp.data().uid
          
 
 
