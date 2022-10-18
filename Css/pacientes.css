@@ -2,3 +2,7 @@ body{
 
     background-image: url("/images/Fondo.png");
 }
+h2{
+    color: #000;
+    font-weight:500
+}

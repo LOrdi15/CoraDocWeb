@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoraDoc</title>
+    <script src = "Chart.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css" href="/Css/interfaz.css">
@@ -98,6 +99,8 @@
                         </thead>
                           <tbody id="tabla_registros"></tbody>
                       </table>
+
+                      <canvas id="MiGrafica" width="400" height="300"></canvas>
 
                        
                         
@@ -343,8 +346,20 @@
 
              renderAccount1(doc);
 
+             let miCanvas = document.getElementById("MiGrafica").getContext("2d")
 
-
+             var chart = new Chart(miCanvas,{
+                type:"bar",
+                data:{
+                  labels:["Lunes", "Martes","Miercoles", "Jueves", "Viernes"],
+                  datasets:[
+                    {
+                        label:"Tomas de Pulso"
+                    }
+                           ]
+                }
+             })
+            
 
 
 
