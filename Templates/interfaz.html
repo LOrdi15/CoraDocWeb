@@ -66,40 +66,37 @@
 
 
       
-    <div class="container">
-        <div class="row justify-content-center align-items-center inner-row" >
-            <div class="col-lg-8 col-md-8">
-               <div class="form-box login-form p-md-5 p-3">
-                    <div class="list-group">
-                      
-                      <table id="tbl_account_list" border="2" cellpadding="10" style="border-collapse:collapse;">
-                        <thead>
-                            <th>Nombre</th>
-                            <th>Apelidos</th>
-                            <th>Num. Celular</th>
-                            <th>Sexo</th>
-                            <th>Ver Paciente</th>
-                            
-                            
-                            
+    <div class="container my-3">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+                  <div class="table-responsive">
+                    <table class="table table-dark">
+                      <thead>
+                            <tr>
+                              <th>Nombre</th>
+                              <th>Apelidos</th>
+                              <th>Celular</th>
+                              <th>Sexo</th>
+                              <th>Ver Paciente</th>
+                            </tr>   
                         </thead>
-                
+                        <tbody id="tbl_account_list"></tbody>
                       </table>
+
                       <br>
-                      <table id="tabla_registros" border="2" cellpadding="10" style="border-collapse:collapse;">
+                      <table class="table table-dark">
                         <thead>
+                          <tr>
                             <th>Nombre</th>
                             <th>Cantidad de Tomas</th>
-                            <th>Fecha</th>
+                            <th>Fecha de toma</th>
                             <th>Hora</th>
                             <th>Promedio Diastolica</th>
                             <th>Promedio Pulso</th>
                             <th>Promedio Sistolica</th>
-                            
-                            
-                            
+                          </tr> 
                         </thead>
-                
+                          <tbody id="tabla_registros"></tbody>
                       </table>
 
                        
@@ -109,7 +106,7 @@
                         
                        
 
-                        
+                      </div>  
                     </div>
                 </div>
             </div>
