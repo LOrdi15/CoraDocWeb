@@ -221,7 +221,7 @@
       var nombre = document.getElementById('primerNombre').value
 
       
-      
+     
     
       createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -239,25 +239,32 @@
         console.error(errorMessage);
         
       });
-
-      const user = auth.currentUser;
-
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        // ...
-        await setDoc(doc(db, "doctores", auth.currentUser.uid), {
+      await setDoc(doc(db, "doctores", auth.currentUser.uid), {
           apellidos: apellido,
           cedula: cedula,
           email: email,
           nombre: nombre,
           pacientes: [],
+      });
+
+      const user = auth.currentUser;
+
+      // if (user) {
+      //   // User is signed in, see docs for a list of available properties
+      //   // https://firebase.google.com/docs/reference/js/firebase.User
+      //   // ...
+      //   await setDoc(doc(db, "doctores", auth.currentUser.uid), {
+      //     apellidos: apellido,
+      //     cedula: cedula,
+      //     email: email,
+      //     nombre: nombre,
+      //     pacientes: [],
           
       
-      });
-      } else {
-        // No user is signed in.
-      }
+      // });
+      // } else {
+      //   // No user is signed in.
+      // }
 
 
 
