@@ -19,7 +19,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
   <style>
     .btn {
-      background-color: DodgerBlue;
+      background-color: DodgerBlue !important;
       border: none;
       color: white;
       padding: 12px 16px;
@@ -31,6 +31,11 @@
     .btn:hover {
       background-color: RoyalBlue;
     }
+tr button{
+  width: 100%;
+  border-radius: 0;
+}
+
   </style>
 
 </head>
@@ -66,7 +71,7 @@
         </li>
       </ul>
 
-      <button class="btn btn-primary" type="button" id="botonLogout" name="botonLogout" aria-pressed="true"> Cerrar Sesion</button>
+      <button class="btn" type="button" id="botonLogout" name="botonLogout" aria-pressed="true"> Cerrar Sesion</button>
 
 
 
