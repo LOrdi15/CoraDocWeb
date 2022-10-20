@@ -1,430 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoraDoc</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"/>
-    <link rel="stylesheet" type="text/css" href="/Css/login-register.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="/Css/login.css">
 
 </head>
 
-<header class = "container-fluid bg-light d-flex justify-content-center p-0" id="header">
-    <p>CoraDoc</p>
+<header class="container-fluid bg-light d-flex justify-content-center p-0" id="header">
+    <h1>CoraDoc</h1>
 
 </header>
 
 <body>
 
-    <div class="container">
 
-        <div class="form-box registration-form p-md-5 p-3">
-          <div class="form-title">
-            <h2 class="fw-bold mb-3">Crea Tu Cuenta</h2>
-          </div>
+    <div class="container my-5">
+        <div class="row justify-content-center align-items-center inner-row">
+            <div class="col-lg-5 col-md-7">
+                <div class="form-box login-form p-md-5 p-3">
+                    <div class="form-title">
+                        <img src="/images/CoraDocLogo.png" class="img-thumbnail" width="50" height="50">
+                        <h2 class="fw-bold mb-3">Crea Tu Cuenta</h2>
+                    </div>
 
 
-          <form action="" id="formulario">
 
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-sm" placeholder="Primer Nombre" id="primerNombre" name="primerNombre"> 
-              <label for="floatingInput">Primer Nombre</label>
+
+                    <form action="" id="formulario">
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm" placeholder="Primer Nombre"
+                                id="primerNombre" name="primerNombre">
+                            <label for="floatingInput">Primer Nombre</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control form-control-sm" placeholder="Apellido" id="apellido"
+                                name="apellido">
+                            <label for="floatingInput">Apellido</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control form-control-sm" placeholder="Cedula Profesional"
+                                id="cedulaProfesional" name="cedulaProfesional">
+                            <label for="floatingInput">Cedula Profesional</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control form-control-sm" id="email" name="email"
+                                placeholder="E-mail" name="email">
+                            <label for="floatingInput">Correo</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" id="password" name="password" placeholder="password"
+                                class="form-control form-control-sm" name="password">
+                            <label for="floatingPassword">Contraseña</label>
+                        </div>
+
+
+
+                        <div class="mt-3">
+
+
+                            <button type="button" name="submitData" class="btn btn-primary" id="submitData"
+                                aria-pressed="true" onclick='return enviarFormulario();'>Registrarse</button>
+
+                        </div>
+
+                    </form>
+                    <div id='error'></div>
+
+
+
+                    <div class="mt-3">
+                        <span>¿Ya tienes una cuenta?</span>
+                        <a href="/Templates/login.html" class="p-0 border-0 bg-transparent primaryColor"> Iniciar Sesion
+                        </a>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-floating mb-3">
-              <input type="text" class="form-control form-control-sm" placeholder="Apellido" id="apellido" name="apellido"> 
-              <label for="floatingInput">Apellido</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="number" class="form-control form-control-sm" placeholder="Cedula Profesional" id="cedulaProfesional" name="cedulaProfesional"> 
-              <label for="floatingInput">Cedula Profesional</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="E-mail" name="email"> 
-              <label for="floatingInput">Correo</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input type="password" id="password" name="password" placeholder="password" class="form-control form-control-sm" name="password"> 
-              <label for="floatingPassword">Contraseña</label>
-            </div>
-
-
-            <div class="mt-3">
-
-              <!-- <button type="button" id="submitData" name="submitData" class="registerbtn">Registrate</button> -->
-              <button type="button" name="submitData" class="btn btn-primary" id="submitData" aria-pressed="true" onclick='return enviarFormulario();'>Registrarse</button>
-
-            </div>
-
-          </form>
-          <div id='error'></div>
-
-
-
-          <div class="mt-3">
-            <span>¿Ya tienes una cuenta?</span>
-            <a href="/Templates/login.html" class="p-0 border-0 bg-transparent primaryColor"> Iniciar Sesion </a>
-          </div>
-
-
         </div>
-
-            
     </div>
-
 </body>
 
 <script>
-  var nombre = document.getElementById('primerNombre');
-  var apellido = document.getElementById('apellido');
-  var cedula = document.getElementById('cedulaProfesional');
-  var email = document.getElementById('email');
-  var password = document.getElementById('password');
-  var error = document.getElementById('error');
-  error.style.color = 'red';
-
-
-  function enviarFormulario(){
-    //console.log('enviando formulario');
-    var mensajesError = [];
-
-    if(nombre.value === null || nombre.value === ''){
-      mensajesError.push('Ingresa tu nombre');
-    }
-    if(apellido.value === null || apellido.value === ''){
-      mensajesError.push('Ingresa tu apellido');
-    }
-    if(cedula.value === null || cedula.value === ''){
-      mensajesError.push('Ingresa tu cedula');
-    }
-    if(email.value === null || email.value === ''){
-      mensajesError.push('Ingresa tu email');
-    }
-    if(password.value === null || password.value === ''){
-      mensajesError.push('Ingresa tu contraseña');
-    }
-    error.innerHTML = mensajesError.join(', ');
-  }
-
-
-  /* var form = document.getElementById('formulario');
-      form.addEventListener('submitData',function(evt){
-          evt.preventDefault();
-          var mensajesError = [];
-
-          if(nombre.value === null || nombre.value === ''){
-            mensajesError.push('Ingresa tu nombre');
-          }
-          if(apellido.value === null || apellido.value === ''){
-            mensajesError.push('Ingresa tu apellido');
-          }
-          if(cedula.value === null || cedula.value === ''){
-            mensajesError.push('Ingresa tu cedula');
-          }
-          if(email.value === null || email.value === ''){
-            mensajesError.push('Ingresa tu email');
-          }
-          if(password.value === null || password.value === ''){
-            mensajesError.push('Ingresa tu password');
-          }
-          error.innerHTML = mensajesError.join(', ');
-          
-      }); */ 
-
-
-</script>
-
-
-<script type="module"> 
-
-
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
-    import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
-    import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion} from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
-
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+    var nombre = document.getElementById('primerNombre');
+    var apellido = document.getElementById('apellido');
+    var cedula = document.getElementById('cedulaProfesional');
+    var email = document.getElementById('email');
+    var password = document.getElementById('password');
+    var error = document.getElementById('error');
+    error.style.color = 'red';
   
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDeqKO79QyhLyOCTSvD1uPUp2mX5GY-dvg",
-      authDomain: "tc2007b-coradoc.firebaseapp.com",
-      projectId: "tc2007b-coradoc",
-      storageBucket: "tc2007b-coradoc.appspot.com",
-      messagingSenderId: "450604347298",
-      appId: "1:450604347298:web:2f23a4f576d2d5f5748cfb"
-    };
-
-
   
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const database = getDatabase(app);
-    const db = getFirestore(app);
-   
+    function enviarFormulario(){
+      
+      var mensajesError = [];
+  
+      if(nombre.value === null || nombre.value === ''){
+        mensajesError.push('Ingresa tu nombre');
+      }
+      if(apellido.value === null || apellido.value === ''){
+        mensajesError.push('Ingresa tu apellido');
+      }
+      if(cedula.value === null || cedula.value === ''){
+        mensajesError.push('Ingresa tu cedula');
+      }
+      if(email.value === null || email.value === ''){
+        mensajesError.push('Ingresa tu email');
+      }
+      if(password.value === null || password.value === ''){
+        mensajesError.push('Ingresa tu contraseña');
+      }
+      error.innerHTML = mensajesError.join(', ');
+    }
+  
+  </script>
+  
+  
+  <script type="module"> 
+  
+  
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
+      import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+      import { getDatabase,set,ref,update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
+      import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion} from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
+  
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
     
-    //------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDeqKO79QyhLyOCTSvD1uPUp2mX5GY-dvg",
+        authDomain: "tc2007b-coradoc.firebaseapp.com",
+        projectId: "tc2007b-coradoc",
+        storageBucket: "tc2007b-coradoc.appspot.com",
+        messagingSenderId: "450604347298",
+        appId: "1:450604347298:web:2f23a4f576d2d5f5748cfb"
+      };
   
   
     
-    // const docRef = await addDoc(collection(db, "cities"), {
-    //   name: "Tokyo",
-    //   country: "Japan",
-    //   pacientes: ["paciente1"]
-    // });
-    // console.log("Document written with ID: ", docRef.id);
-    
-    // //
-    // const referencia = doc(db,"cities",docRef.id);
-    // await updateDoc(referencia,{
-    //   id:docRef.id,
-    //   pacientes: arrayUnion("paciente2")
-      
-    // })
-
-    
-    //------------------------------------------------------------------------------------------
-    //------------------------------------------------------------------------------------------
-
-
-    
-  
-   
-
-    
-    //setDoc(id, {pacientes: "2"}, {mergue:true});
-
-    // id = doc(db,"cities", docRef.id);
-    // setDoc(puta2, {capital:"puta2"},{merge: true});
-    
-      
-    
-    submitData.addEventListener("click", async (e) => { 
-
-      
-
-      var email = document.getElementById('email').value
-      
-      var apellido = document.getElementById('apellido').value
-      var password = document.getElementById('password').value
-
-      var cedula = document.getElementById('cedulaProfesional').value
-      var nombre = document.getElementById('primerNombre').value
-
-      
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const database = getDatabase(app);
+      const db = getFirestore(app);
      
-    
-      createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
+      submitData.addEventListener("click", async (e) => { 
+  
         
+  
+        var email = document.getElementById('email').value
         
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      
-        alert(errorMessage);
-        console.error(errorMessage);
+        var apellido = document.getElementById('apellido').value
+        var password = document.getElementById('password').value
+  
+        var cedula = document.getElementById('cedulaProfesional').value
+        var nombre = document.getElementById('primerNombre').value
+  
         
-      });
-      await setDoc(doc(db, "doctores", auth.currentUser.uid), {
-          apellidos: apellido,
-          cedula: cedula,
-          email: email,
-          nombre: nombre,
-          pacientes: [],
-      });
-
-      const user = auth.currentUser;
-
-      // if (user) {
-      //   // User is signed in, see docs for a list of available properties
-      //   // https://firebase.google.com/docs/reference/js/firebase.User
-      //   // ...
-      //   await setDoc(doc(db, "doctores", auth.currentUser.uid), {
-      //     apellidos: apellido,
-      //     cedula: cedula,
-      //     email: email,
-      //     nombre: nombre,
-      //     pacientes: [],
-          
-      
-      // });
-      // } else {
-      //   // No user is signed in.
-      // }
-
-
-
-      // await setDoc(doc(db, "doctores", auth.currentUser.uid), {
-      //   apellidos: apellido,
-      //   cedula: cedula,
-      //   email: email,
-      //   nombre: nombre,
-      //   pacientes: []
-      
-      // });
-
-      
-
-        //await setDoc(doc(db, "doctores", user.uid), data);
-
-          // const docRef =  await addDoc(collection(db, "doctores"), {
-          //   apellidos: apellido,
-          //   cedula: cedula,
-          //   email: email,
-          //   nombre: nombre,
-          //   pacientes: []
-          // });
-          
-        
-          // console.log("Document written with ID: ", docRef.id);
-
-
-          // const referencia = doc(db,"doctores", docRef.id);
-          // await updateDoc(referencia,{
-          //   id: docRef.id
-          // })
-
-
-
-
-// codigo funcionando 
-//------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------
-      
-        // createUserWithEmailAndPassword(auth, email, password)
-        //   .then((userCredential) => {
-            
-        //     const user = userCredential.user;
-
-        //     // try {
-        //     //   const docRef =  addDoc(collection(db, "doctores"), {
-        //     //     //apellidos: apellido,
-        //     //     //cedula: cedula,
-        //     //     email: email,
-        //     //     //nombre: nombre,
-
-        //     //   });
-            
-        //     //   console.log("Document written with ID: ", docRef.id);
-        //     //   alert('Usuario creado correctamente')
-
-              
-              
-        //     // }
-        //     // catch (e) {
-        //     // console.error("Error adding document: ", e);
-        //     // }
-
-        //   })
-        //   .catch((error) => {
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-          
-        //     alert(errorMessage);
-        //     console.error(errorMessage);
-        //   });
-
-//------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------
-
-
-        // const docRef = await addDoc(collection(db, "cities"), {
-        //   name: "Tokyo",
-        //   country: "Japan",
-        //   pacientes: ["paciente1"]
-        // });
-        // console.log("Document written with ID: ", docRef.id);
-        
-        // //
-        // const referencia = doc(db,"cities",docRef.id);
-        // await updateDoc(referencia,{
-        //   id:docRef.id,
-        //   pacientes: arrayUnion("paciente2")
-        // })
-//------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------
-      
-    
-
-
-        // CODIGO CORRECTO!
-         // CREAR USUARIO 
-        // createUserWithEmailAndPassword(auth, email, password)
-        // .then((userCredential) => {
-          
-        //   const user = userCredential.user;
-
-        //   try {
-        //     const docRef =  addDoc(collection(db, "doctores"), {
-        //       apellidos: apellido,
-        //       cedula: cedula,
-        //       email: email,
-        //       nombre: nombre,
-
-        //     });
-          
-        //     console.log("Document written with ID: ", docRef.id);
-        //     alert('Usuario creado correctamente')
-
-        //     
-            
-        //   }
-        //   catch (e) {
-        //   console.error("Error adding document: ", e);
-        //   }
-
-        // })
-        // .catch((error) => {
-        //   const errorCode = error.code;
-        //   const errorMessage = error.message;
-        
-        //   alert(errorMessage);
-        //   console.error(errorMessage);
-        // });
-
-   
-            
-          // Real Time Data Base
-            /* uid es el unique id que se genera al crear el usuario que se guarda en la base de datos
-            set(ref(database, 'users/' + user.uid), {
-                
-                email: email,
-               // apellido: apellido,
-
-            }) 
-              .then(() => {
-                  
-                  //  db.collection('doctores')
-              
-              }) 
-          .catch((error) => {
-              alert(error);
-              
-          }); */ 
-          
-               
        
-
-    });
-
+      
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
     
- 
-</script>
-</html>
+          const user = userCredential.user;
+          
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        
+          alert(errorMessage);
+          console.error(errorMessage);
+          
+        });
+        await setDoc(doc(db, "doctores", auth.currentUser.uid), {
+            apellidos: apellido,
+            cedula: cedula,
+            email: email,
+            nombre: nombre,
+            pacientes: [],
+        });
+  
+        const user = auth.currentUser;
+  
+      });
+  
+      
+   
+  </script>
+  </html>
