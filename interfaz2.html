@@ -96,12 +96,12 @@ tr button{
                 <th>Apelidos</th>
                 <th>Celular</th>
                 <th>Sexo</th>
+                <th>Edad</th>
                 <th>Ver Paciente</th>
               </tr>
             </thead>
             <tbody id="tbl_account_list"></tbody>
           </table>
-          <button id="Borrar" class = "btn"> Limpiar tabla </button>
 
           <br>
           <table class="table table-light">
@@ -182,12 +182,6 @@ tr button{
         console.log(err.message)
       })
 
-  });
-
-  Borrar.addEventListener("click", (e) => {
-    var x = document.querySelector("#tabla_registros")
-    x.remove()
-    window.location.reload()
   });
 
 
@@ -274,6 +268,12 @@ tr button{
                 //console.log("Current data: ", doc.data());
               });
 
+              var fecha = documentoPaciente.data().nacimiento;
+
+              var nacimiento = fecha.toDate().getFullyear();
+              var hoy = new Date().getFullYear();
+              console.log("Edad", hoy - nacimiento)
+
 
 
 
@@ -285,7 +285,8 @@ tr button{
                 let td_apellidos = document.createElement('td');
                 let td_numCelular = document.createElement('td');
                 let td_sexo = document.createElement('td');
-                let td_nacimiento = document.createElement('td');
+                
+                let Edad = document.createElement('td');
 
                 let boton = document.createElement('td');
 
@@ -294,19 +295,21 @@ tr button{
                 td_apellidos.textContent = documentoPaciente.data().apellidos
                 td_numCelular.textContent = documentoPaciente.data().numCelular;
                 td_sexo.textContent = documentoPaciente.data().sexo;
+                Edad.textContent = hoy - nacimiento;
                 boton = item;
 
                 tr.appendChild(td_nombre)
                 tr.appendChild(td_apellidos)
                 tr.appendChild(td_numCelular)
                 tr.appendChild(td_sexo)
+                tr.appendChild(Edad)
                 tr.appendChild(boton)
 
 
                 accountList.appendChild(tr);
 
 
-
+S
 
 
               }

@@ -9,3 +9,8 @@ tbody button {
 canvas{
     background-color: white;
 }
+
+h2{
+    font-weight: bolder;
+    color: black;
+}
