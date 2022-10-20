@@ -1,14 +1,23 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
+h1{
+    font-weight: bold;
+}
+
+
+
+
 #header{
-    font-family: "Roboto";
+    
     font-size: 35px;
     font-weight: bold;
+    padding: 15px;
 }
 
 body{
     font-family: "Roboto";
-    background-image: url("/images/Fondo.png");
+    background: linear-gradient(to left, #5B86E5, #36D1DC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .inner-row{
@@ -27,9 +36,7 @@ body{
     box-shadow: 0 0 20px 0 rgba(0,0,0,0.2), 0 5px 5px 0 rgba(0,0,0,0.24);
 }
 
-.registration-form{
-    display: none; 
-}
+
 
 #boton{
     

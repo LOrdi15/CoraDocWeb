@@ -1,69 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoraDoc</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous"/>
-    <link rel="stylesheet" type="text/css" href="/Css/token.css">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="/Css/login.css">
 
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand">
-               <b><img src="/images/CoraDocLogo.png" alt="Logo" width="30" height="30"  class="d-inline-block align-text-top">
-                CoraDoc
-              </a></b>
-          
-            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" style="color:black" href="/Templates/interfaz.html"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
-                  </svg></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color:black" href="/Templates/token.html" ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-qr-code" viewBox="0 0 16 16">
-                    <path d="M2 2h2v2H2V2Z"/>
-                    <path d="M6 0v6H0V0h6ZM5 1H1v4h4V1ZM4 12H2v2h2v-2Z"/>
-                    <path d="M6 10v6H0v-6h6Zm-5 1v4h4v-4H1Zm11-9h2v2h-2V2Z"/>
-                    <path d="M10 0v6h6V0h-6Zm5 1v4h-4V1h4ZM8 1V0h1v2H8v2H7V1h1Zm0 5V4h1v2H8ZM6 8V7h1V6h1v2h1V7h5v1h-4v1H7V8H6Zm0 0v1H2V8H1v1H0V7h3v1h3Zm10 1h-1V7h1v2Zm-1 0h-1v2h2v-1h-1V9Zm-4 0h2v1h-1v1h-1V9Zm2 3v-1h-1v1h-1v1H9v1h3v-2h1Zm0 0h3v1h-2v1h-1v-2Zm-4-1v1h1v-2H7v1h2Z"/>
-                    <path d="M7 12h1v3h4v1H7v-4Zm9 2v2h-3v-1h2v-1h1Z"/>
-                  </svg></a>
-              </li>
-            </ul>
-            
-            <a class="nav-link active" style="color:black" href="/Templates/login-register.html"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-              </svg>
-              </svg></a>
-            
-          </div>
-        </div>
-      </nav>
 
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <b><img src="/images/CoraDocLogo.png" alt="Logo" width="30" height="30"
+                    class="d-inline-block align-text-top">
+                CoraDoc
+        </a></b>
+
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" style="color:black" href="/Templates/interfaz.html"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
+                    </svg></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="color:black" href="/Templates/token.html"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+                        class="bi bi-qr-code" viewBox="0 0 16 16">
+                        <path d="M2 2h2v2H2V2Z" />
+                        <path d="M6 0v6H0V0h6ZM5 1H1v4h4V1ZM4 12H2v2h2v-2Z" />
+                        <path d="M6 10v6H0v-6h6Zm-5 1v4h4v-4H1Zm11-9h2v2h-2V2Z" />
+                        <path
+                            d="M10 0v6h6V0h-6Zm5 1v4h-4V1h4ZM8 1V0h1v2H8v2H7V1h1Zm0 5V4h1v2H8ZM6 8V7h1V6h1v2h1V7h5v1h-4v1H7V8H6Zm0 0v1H2V8H1v1H0V7h3v1h3Zm10 1h-1V7h1v2Zm-1 0h-1v2h2v-1h-1V9Zm-4 0h2v1h-1v1h-1V9Zm2 3v-1h-1v1h-1v1H9v1h3v-2h1Zm0 0h3v1h-2v1h-1v-2Zm-4-1v1h1v-2H7v1h2Z" />
+                        <path d="M7 12h1v3h4v1H7v-4Zm9 2v2h-3v-1h2v-1h1Z" />
+                    </svg></a>
+            </li>
+        </ul>
+
+        <button class="btn btn-primary" type="button" id="botonLogout" name="botonLogout" aria-pressed="true"> Cerrar
+            Sesion</button>
+
+
+    </div>
+    </div>
+</nav>
+
+<body>
 
     <div class="container">
-        <div class="row justify-content-center align-items-center inner-row" >
+        <div class="row justify-content-center align-items-center inner-row">
             <div class="col-lg-5 col-md-7">
-               <div class="form-box login-form p-md-5 p-3">
+                <div class="form-box login-form p-md-5 p-3">
                     <div class="form-title">
-                        <h2 class="fw-bold mb-3">Ingresar Token</h2>
+                        <img src="/images/CoraDocLogo.png" class="img-thumbnail" width="50" height="50">
+                        <h2 class="fw-bold mb-3">Ingresa Token</h2>
                     </div>
                     <form action="">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control form-control-sm" placeholder="Token" id="floatingInput">
+                            <input type="text" class="form-control form-control-sm" placeholder="Token" id="idToken" name="idToken">
                             <label for="floatingInput">Token</label>
                         </div>
-                            <button class="btn btn-primary">Confirmar</button>
-                        </div>
-                    </form>
-               </div>
+                        <button type="button" name="submitData" id="submitData" aria-pressed="true"
+                            class="btn btn-primary">Confirmar</button>
+                </div>
+                </form>
+            </div>
+</body>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+    import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc,arrayUnion} from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+    apiKey: "AIzaSyDeqKO79QyhLyOCTSvD1uPUp2mX5GY-dvg",
+    authDomain: "tc2007b-coradoc.firebaseapp.com",
+    projectId: "tc2007b-coradoc",
+    storageBucket: "tc2007b-coradoc.appspot.com",
+    messagingSenderId: "450604347298",
+    appId: "1:450604347298:web:2f23a4f576d2d5f5748cfb"
+  };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  //const database = getDatabase(app);
+  const db = getFirestore(app);
+  const user = auth.currentUser;
+  
+
+  
+  botonLogout.addEventListener('click', (e) => {
+    signOut(auth) 
+      .then(() => {
+        alert('Se cerro sesión')
+        console.log('El usuario cerro sesion')
+        location.href = "login.html"
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+    
+  });
+
+  
+  onAuthStateChanged(auth, (user) => {
+  if (user) {
+
+
+
 
     
-</body>
+    // const uid = Auth.auth().currentUser.uid 
+   
+    submitData.addEventListener('click', async (e) => {
+
+    var idPaciente = document.getElementById('idToken').value
+    if (user !== null) {
+
+      // The user's ID, unique to the Firebase project. Do NOT use
+      // this value to authenticate with your backend server, if
+      // you have one. Use User.getToken() instead.
+      const uid = user.uid;
+      const referenciaID = doc(db,"doctores",uid);
+      await updateDoc(referenciaID,{
+         pacientes: arrayUnion(idPaciente)
+      })
+
+      
+    }
+
+    
+   
+
+    });
+
+  } else {
+    // Usuario sin inicio de login
+    window.location.href = "login.html"
+  }
+  });
+
+
+
+
+</script>
 </html>
