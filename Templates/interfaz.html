@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoraDoc</title>
+  <!-- <script src = "Chart.js"></script> -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="/Css/interfaz.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+  <style>
+    .btn {
+      background-color: DodgerBlue !important;
+      border: none;
+      color: white;
+      padding: 12px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Darker background on mouse-over */
+    .btn:hover {
+      background-color: RoyalBlue;
+    }
+tr button{
+  width: 100%;
+  border-radius: 0;
+}
+
+  </style>
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand">
+        <b><img src="/images/CoraDocLogo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+          CoraDoc
+      </a></b>
+
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" style="color:black" href="/Templates/interfaz.html"><svg
+              xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+              class="bi bi-house-door-fill" viewBox="0 0 16 16">
+              <path
+                d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
+            </svg></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" style="color:black" href="/Templates/token.html"><svg xmlns="http://www.w3.org/2000/svg"
+              width="35" height="35" fill="currentColor" class="bi bi-qr-code" viewBox="0 0 16 16">
+              <path d="M2 2h2v2H2V2Z" />
+              <path d="M6 0v6H0V0h6ZM5 1H1v4h4V1ZM4 12H2v2h2v-2Z" />
+              <path d="M6 10v6H0v-6h6Zm-5 1v4h4v-4H1Zm11-9h2v2h-2V2Z" />
+              <path
+                d="M10 0v6h6V0h-6Zm5 1v4h-4V1h4ZM8 1V0h1v2H8v2H7V1h1Zm0 5V4h1v2H8ZM6 8V7h1V6h1v2h1V7h5v1h-4v1H7V8H6Zm0 0v1H2V8H1v1H0V7h3v1h3Zm10 1h-1V7h1v2Zm-1 0h-1v2h2v-1h-1V9Zm-4 0h2v1h-1v1h-1V9Zm2 3v-1h-1v1h-1v1H9v1h3v-2h1Zm0 0h3v1h-2v1h-1v-2Zm-4-1v1h1v-2H7v1h2Z" />
+              <path d="M7 12h1v3h4v1H7v-4Zm9 2v2h-3v-1h2v-1h1Z" />
+            </svg></a>
+        </li>
+      </ul>
+
+      <button class="btn" type="button" id="botonLogout" name="botonLogout" aria-pressed="true"> Cerrar Sesion</button>
+
+
+
+
+
+    </div>
+    </div>
+  </nav>
+
+
+
+
+
+  <div class="container my-3">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12">
+        <div class="table-responsive">
+          <table class="table table-light">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Apelidos</th>
+                <th>Celular</th>
+                <th>Sexo</th>
+                <th>Ver Paciente</th>
+              </tr>
+            </thead>
+            <tbody id="tbl_account_list"></tbody>
+          </table>
+          <button id="Borrar" class = "btn"> Limpiar tabla </button>
+
+          <br>
+          <table class="table table-light">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Cantidad de Tomas</th>
+                <th>Fecha de toma</th>
+                <th>Hora</th>
+                <th>Promedio Sistólica</th>
+
+                <th>Promedio Pulso</th>
+                <th>Promedio Diastólica</th>
+
+              </tr>
+            </thead>
+            <tbody id="tabla_registros"></tbody>
+          </table>
+
+
+          <div class="container">
+            <h2>Grafica de Promedio</h2>
+            <div>
+              <canvas id="myChart"></canvas>
+            </div>
+          </div>
+
+          <!-- <button type="button" name="submitData" class="btn btn-primary" id="paciente" aria-pressed="true"></button> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+
+
+</body>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+  import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-database.js";
+  import { collection, addDoc, getFirestore, getDocs, setDoc, doc, updateDoc, arrayUnion, getDoc, query, where, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-firestore.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDeqKO79QyhLyOCTSvD1uPUp2mX5GY-dvg",
+    authDomain: "tc2007b-coradoc.firebaseapp.com",
+    projectId: "tc2007b-coradoc",
+    storageBucket: "tc2007b-coradoc.appspot.com",
+    messagingSenderId: "450604347298",
+    appId: "1:450604347298:web:2f23a4f576d2d5f5748cfb"
+  };
+
+
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const database = getDatabase(app);
+  const db = getFirestore(app);
+  const user = auth.currentUser;
+
+
+  botonLogout.addEventListener('click', (e) => {
+    signOut(auth)
+      .then(() => {
+        alert('Se cerro sesión')
+        console.log('El usuario cerro sesion')
+        location.href = "login.html"
+      })
+      .catch((err) => {
+        console.log(err.message)
+      })
+
+  });
+
+  Borrar.addEventListener("click", (e) => {
+    var x = document.querySelector("#tabla_registros")
+    x.remove()
+    window.location.reload()
+  });
+
+
+
+  onAuthStateChanged(auth, async (user) => {
+
+    if (user !== null) {
+      const uid = user.uid
+      const docRef = doc(db, "doctores", uid);
+      const docSnap = await getDoc(docRef);
+
+
+      // const docReff = doc(db, "pacientes", "DmgcFh2jrYfZ7qN8jeXV2G7bLZG3");
+      // const docSnapp = await getDoc(docReff);
+
+
+
+
+
+      if (docSnap.exists()) {
+
+        // Traer base de datos doctor
+        // console.log("ID pacientes",docSnap.data().pacientes);
+        var info = docSnap.data().pacientes
+        var pacientes = [info]
+
+
+
+
+
+        //Creacion html
+
+        // for (var i = 0; i < inf; i++){
+        //   var row = "<h2>" + inf + "<h2>";
+
+        //   document.getElementById("tabla").innerHTML = row
+        // }
+
+
+
+
+        //--------------------
+        for (var i = 0; i < info.length; i++) {
+          const docRefff = doc(db, "pacientes", info[i]);
+          const documentoPaciente = await getDoc(docRefff);
+
+
+          if (documentoPaciente.exists()) {
+            var idPaciente = documentoPaciente.data().uid
+            function printBtn() {
+
+
+              var btn = document.createElement("button");
+
+              btn.setAttribute("class", "btn");
+              //btn.setAttribute("id","btnid"+i);
+              btn.id = "btnid" + i;
+
+
+
+
+
+              var t = document.createTextNode(documentoPaciente.data([i]).nombre);
+              btn.appendChild(t);
+              document.body.appendChild(btn);
+
+              var item = document.getElementById("btnid" + [i]);
+
+
+
+
+
+
+              //*******************************************************************************
+
+
+
+              const unsub = onSnapshot(doc(db, "pacientes", idPaciente), (doc) => {
+
+                renderAccount(doc);
+
+
+
+                //console.log("Current data: ", doc.data());
+              });
+
+
+
+
+
+              const accountList = document.querySelector('#tbl_account_list')
+              function renderAccount(doc) {
+                let tr = document.createElement('tr');
+                let td_nombre = document.createElement('td');
+                let td_apellidos = document.createElement('td');
+                let td_numCelular = document.createElement('td');
+                let td_sexo = document.createElement('td');
+                let td_nacimiento = document.createElement('td');
+
+                let boton = document.createElement('td');
+
+                //tr.setAttribute('data-id', idPaciente);
+                td_nombre.textContent = documentoPaciente.data().nombre;
+                td_apellidos.textContent = documentoPaciente.data().apellidos
+                td_numCelular.textContent = documentoPaciente.data().numCelular;
+                td_sexo.textContent = documentoPaciente.data().sexo;
+                boton = item;
+
+                tr.appendChild(td_nombre)
+                tr.appendChild(td_apellidos)
+                tr.appendChild(td_numCelular)
+                tr.appendChild(td_sexo)
+                tr.appendChild(boton)
+
+
+                accountList.appendChild(tr);
+
+
+
+
+
+              }
+
+
+              //*******************************************************************************
+
+
+              item.onclick = async () => {
+
+
+
+                var datosPaciente = documentoPaciente.data();
+                console.log("Informacion paciente", datosPaciente);
+
+                const q = query(collection(db, "registros"), where("idPaciente", "==", documentoPaciente.data().uid));
+                const querySnapshot = await getDocs(q);
+
+                //var idRegistro = querySnapshot.data().idRegistro;
+
+                var xValues = [];
+                var yValues = [   
+                    {
+                      label: "Presion Distolica",
+                      data: [],
+                      borderColor: "purple",
+                      pointRadius: 10,
+                      // fill: false
+                    },                                     
+                    {
+                      label: "Presion Sistolica",
+                      data: [],
+                      borderColor: "blue",
+                      pointRadius: 10,
+                      fill: false
+                    },
+                    //{
+                      //label: "Pulso Promedio",
+                      //data: [],
+                      //borderColor: "black",
+                      //pointRadius: 10,
+                      //fill: false
+                    //}
+                  ];
+                querySnapshot.forEach(async (doc) => {
+                  var idRegistro = doc.data().idRegistro;
+
+
+                  xValues.push(doc.data().fecha);
+                  yValues[0].data.push(doc.data().promDiastolica);
+                  yValues[1].data.push(doc.data().promSistolica);
+                  // yValues[2].data.push(doc.data().promPulso);
+                  
+                  
+
+                  // doc.data() is never undefined for query doc snapshots
+                  console.log(doc.id, " => ", doc.data());
+                  //console.log(doc.id, " SIIIIIIII ", idRegistro);
+
+
+
+                  //console.log("Current data: ", doc.data());
+                  const accountList1 = document.querySelector('#tabla_registros')
+                  function renderAccount1(doc) {
+                    let td_nombre = document.createElement('td');
+                    let tr1 = document.createElement('tr');
+                    let cantidadTomas = document.createElement('td');
+                    let fecha = document.createElement('td');  // eje x
+                    let hora = document.createElement('td');
+                    let Diastolica = document.createElement('td'); // eje Y (2)
+                    let pulso = document.createElement('td');
+                    let sistolica = document.createElement('td'); // eje Y (1)
+
+                    //tr.setAttribute('data-id', idPaciente);
+
+                    cantidadTomas.textContent = doc.data().cantidadTomas;
+                    fecha.textContent = doc.data().fecha // X
+                    hora.textContent = doc.data().hora;
+                    sistolica.textContent = doc.data().promSistolica; // Y1
+
+                    pulso.textContent = doc.data().promPulso;
+                    Diastolica.textContent = doc.data().promDiastolica; // Y2
+                    td_nombre.textContent = documentoPaciente.data().nombre;
+
+                    tr1.appendChild(td_nombre);
+                    tr1.appendChild(cantidadTomas);
+                    tr1.appendChild(fecha);
+                    tr1.appendChild(hora);
+                    tr1.appendChild(sistolica);
+
+                    tr1.appendChild(pulso);
+                    tr1.appendChild(Diastolica);
+
+                    accountList1.appendChild(tr1);
+
+                  }
+                  renderAccount1(doc);
+                });
+                
+                var ctx = document.getElementById("myChart").getContext("2d");
+                var myChart = new Chart(ctx, {
+                  type: "line",
+                  data: {
+                    labels: xValues,
+                    datasets: yValues
+                  },
+                });
+              }
+
+            }
+            window.onload = printBtn();
+
+            // console.log("Nombre paciente del arreglo:", documentoPaciente.data().nombre);
+
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+          var idPaciente = documentoPaciente.data().uid
+
+        }
+        // function printBtn(){
+        //   for (var i = 0; i < info.length; i++){
+        //     var btn = document.createElement("button");
+        //     var t = document.createTextNode(info[i].nombre);
+        //     btn.appendChild(t);
+        //     document.body.appendChild(btn);
+        //   }
+        // }
+        // window.onload = printBtn();
+
+        // paciente  
+
+        // const docReff = doc(db, "pacientes", "pYCxAJh9nGbHljuiouWiRJ7bDKk2");
+        // const docSnapp = await getDoc(docReff);
+
+        // if (docSnapp.exists()) {
+        //   console.log("Info paciente especificando ID manualmente", docSnapp.data());
+        // } else {
+        //   // doc.data() will be undefined in this case
+        //   console.log("No such document!");
+        // }
+        //console.log("Nombre paciente:",docSnapp.data().nombre);
+        // 
+        // 
+      } else {
+
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+
+      }
+    } else {
+      // User is signed out
+      window.location.href = "login.html"
+    }
+  });
+</script>
+
+</html>
